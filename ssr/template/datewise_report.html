@@ -1,0 +1,185 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block report %}active{% endblock %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+<center>
+    <script type="text/javascript">
+function generate() {
+    var doc = new jsPDF('p', 'pt', 'letter');
+    var htmlstring = '';
+    var tempVarToCheckPageHeight = 0;
+    var pageHeight = 0;
+    pageHeight = doc.internal.pageSize.height;
+    specialElementHandlers = {
+        // element with id of "bypass" - jQuery style selector
+        '#bypassme': function(element, renderer) {
+            // true = "handled elsewhere, bypass text extraction"
+            return true
+        }
+    };
+    margins = {
+        top: 150,
+        bottom: 60,
+        left: 40,
+        right: 40,
+        width: 600
+    };
+    var y = 20;
+    doc.setLineWidth(2);
+    doc.text(200, y = y + 30, "       Date wise Report");
+    doc.autoTable({
+        html: '#simple_table',
+        startY: 70,
+        theme: 'grid',
+        columnStyles: {
+            0: {
+                cellWidth: 30,
+            },
+            1: {
+                cellWidth: 50,
+            },
+            2: {
+                cellWidth: 80,
+            },
+            3: {
+                cellWidth: 80,
+            },
+            4: {
+                cellWidth: 50,
+            },
+            5: {
+                cellWidth: 50,
+            },
+            6: {
+                cellWidth: 55,
+            },
+            7: {
+                cellWidth: 50,
+            },
+            8: {
+                cellWidth: 50,
+            },
+            9: {
+                cellWidth: 50,
+            }
+        },
+        styles: {
+            minCellHeight: 40
+        }
+    })
+    doc.save('datewise_report.pdf');
+}
+
+    </script>
+</center>
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Date Wise Report</h3>
+                    <p class="text-subtitle text-muted">
+
+                    </p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav
+                            aria-label="breadcrumb"
+                            class="breadcrumb-header float-start float-lg-end"
+                    >
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/index/">Dashboard</a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <form method="post" action="/report2/" data-parsley-validate="">
+                        {% csrf_token %}
+                        &emsp;<input class="btn btn-primary me-1 mb-1" type="button" onclick="generate()"
+                                     value="Export To PDF"/>
+                        <br/>
+                        <br/>
+                        <div class="col-sm-12 md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Date From :</label>
+                                <input type="date" min="{{date}}" placeholder="From"
+                                       class="form-control" name="start_date"
+                                       data-parsley-required="true"
+                                       data-parsley-required-message="From date is required" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Date To :</label>
+                                <input type="date" min="{{date}}" placeholder="To"
+                                       class="form-control" name="end_date"
+                                       data-parsley-required="true"
+                                       data-parsley-required-message="End date is required" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-end">
+                            <button class="btn btn-primary me-1 mb-1">Generate Report</button>
+                        </div>
+                    </form>
+                    <table class="table table-striped" id="simple_table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Pickup Address</th>
+                            <th>Drop Address</th>
+                            <th>Approx_KM</th>
+                            <th>Amount</th>
+                            <th>Payment Status</th>
+                            <th>Customer</th>
+                            <th>Driver</th>
+                            <th>Vehicle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for data in bo %}
+
+                        <tr>
+                            <td>{{data.book_id}}</td>
+                            <td>{{data.book_date_time}}</td>
+                            <td>{{data.pickup_address}}</td>
+                            <td>{{data.drop_address}}</td>
+                            <td>&emsp;&emsp;{{data.approx_km}}</td>
+                            <td>{{data.amount}}Rs.</td>
+                            <td>
+                                {% if data.payment_status == 1 %}
+                                &emsp;&emsp;<span class="badge bg-light-success">Success</span>
+                                {% else %}
+                                &emsp;&emsp;<span class="badge bg-light-secondary">Pending</span>
+                                {% endif %}
+                            </td>
+                            <td>{{data.cust.first_name}} {{data.cust.last_name}}</td>
+                            <td>{{data.dri.first_name}} {{data.dri.last_name}}</td>
+                            <td>{{data.veh.cate.cate_type}}</td>
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

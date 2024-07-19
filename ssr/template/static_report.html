@@ -1,0 +1,111 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block report %}active{% endblock %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+
+<center>
+<script type="text/javascript">
+function generate() {
+    var doc = new jsPDF('p', 'pt', 'letter');
+    var htmlstring = '';
+    var tempVarToCheckPageHeight = 0;
+    var pageHeight = 0;
+    pageHeight = doc.internal.pageSize.height;
+    specialElementHandlers = {
+        // element with id of "bypass" - jQuery style selector
+        '#bypassme': function(element, renderer) {
+            // true = "handled elsewhere, bypass text extraction"
+            return true
+        }
+    };
+    margins = {
+        top: 150,
+        bottom: 60,
+        left: 40,
+        right: 40,
+        width: 600
+    };
+    var y = 20;
+    doc.setLineWidth(2);
+    doc.text(200, y = y + 30, "Static Report");
+    doc.autoTable({
+        html: '#simple_table',
+        startY: 70,
+        theme: 'grid',
+        columnStyles: {
+            0: {
+                cellWidth: 180,
+            },
+            1: {
+                cellWidth: 180,
+            },
+        },
+        styles: {
+            minCellHeight: 40
+        }
+    })
+    doc.save('static_report.pdf');
+}
+</script>
+ </center>
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Vehicle Wise Earning Report</h3>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav
+                            aria-label="breadcrumb"
+                            class="breadcrumb-header float-start float-lg-end"
+                    >
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/index/">Dashboard</a>
+                            </li>
+                            <!--                            <li class="breadcrumb-item active" aria-current="page">-->
+                            <!--                                BookingTable-->
+                            <!--                            </li>-->
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-header"></div>
+                <div>
+                    <table class="table table-striped" id="simple_table">
+                             &emsp;<input class="btn btn-primary me-1 mb-1" type="button" onclick="generate()" value="Export To PDF" />
+                        <br/>
+                        <br/>
+                        <thead>
+                        <tr>
+                            <th>Vehicle</th>
+                            <th>Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for data in b %}
+
+                        <tr>
+                            <td>{{data.name}}</td>
+                            <td>{{data.total}} Rs.</td>
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

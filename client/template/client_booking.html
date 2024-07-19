@@ -1,0 +1,150 @@
+{% extends 'client_header.html' %}
+{% load static %}
+{% block vehicles %}active{% endblock %}
+
+{% block content %}
+<!-- =-=-=-=-=-=-= HEADER END =-=-=-=-=-=-= -->
+
+<!-- =-=-=-=-=-=-= PAGE BREADCRUMB =-=-=-=-=-=-= -->
+<section class="breadcrumbs-area parallex">
+    <div class="container">
+        <div class="row">
+            <div class="page-title">
+                <div class="col-sm-12 col-md-6 page-heading text-left">
+                    <h3>book your order</h3>
+                    <h2>Enter Your Booking Details</h2>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <ul class="breadcrumbs">
+<!--                        <li><a href="#">home</a></li>-->
+<!--                        <li><a href="#">pages</a></li>-->
+<!--                        <li><a href="#">tracking</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= -->
+
+<!-- =-=-=-=-=-=-= Tracking History =-=-=-=-=-=-= -->
+<section id="contact-us" class="section-padding-70 contact-bg">
+    <div class="container">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-md-7">
+                <div class="about-title">
+                    <h2>Place Booking Online</h2>
+                    <p>The movepack.com is a one-stop platform for getting various solutions on relocation. The website has a vast network of packers and movers service offerings, which are trusted and operating throughout the country. With this one can assure you of getting the most steadfast solutions in the field of household and office relocation. </p>
+                </div>
+                <div class="notice success" id="success">
+                    <p>Thanks so much for your message. We check e-mail frequently and will try our best to respond to
+                        your inquiry.</p>
+                </div>
+
+                <div class="row margin-top-50">
+                    <form method="post" action="/client/client_booking/{{vid}}" data-parsley-validate="">
+                        {% csrf_token %}
+                        <div class="col-sm-12 md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Shipment Date:</label>
+                                <input type="date" min="{{date}}" placeholder="Enter Booking Date"
+                                       class="form-control" name="book_date_time" id="book_date_time"
+                                       data-parsley-required="true"
+                                       data-parsley-required-message="Date is required">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Departure Location:</label>
+                                <input type="text" placeholder="Enter Source" name="pickup_address" id="pickup_address"
+                                       class="form-control"
+                                       data-parsley-required="true"
+                                       data-parsley-required-message="Departure Location is required">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Delivery Location:</label>
+                                <input type="text" placeholder="Enter Destination" name="drop_address" id="drop_address"
+                                       class="form-control"
+                                       data-parsley-required="true"
+                                       data-parsley-required-message="Delivery Location is required">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Approx Kilometer:</label>
+                                <input type="text" placeholder="Enter Approx kilometer" name="approx_km" id="approx_km"
+                                       class="form-control" data-parsley-required="true"
+                                       data-parsley-required-message="Approx Kilometer is required">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label>Vehicle Rent: ₹{{vd.rent}}/km</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <div class="payment-group margin-bottom-30">
+                                <label>Select Payment Method:</label><br>
+                                            <div class="radio radio-info ">
+                                                <input type="radio" id="inlineRadio1" value="1" name="payment_type" required>
+                                                <label for="inlineRadio1"> Pay with Rozar Pay</label> &emsp;&emsp;
+                                                <br/>
+                                                <input type="radio" id="inlineRadio2" value="2"
+                                                       name="payment_type">
+                                                <label for="inlineRadio2"> Cash on Delivery </label>
+                                            </div>
+
+                                        </div>
+
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label class="hidden">Cust ID:</label>
+                                <input type="text" placeholder="Enter Customer ID" name="cust" id="cust"
+                                       class="hidden" value="{{id1}}">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label class="hidden">Vehicle ID:</label>
+                                <input type="text" placeholder="Enter Vehicle ID" name="veh" id="veh"
+                                       class="hidden" value="{{vid}}">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-xs-12 clearfix">
+                            <button type="submit" id="yes" class="btn btn-primary btn-sm">Book Now</button>
+                            <img id="loader" alt="" src="{% static 'images/loader.gif' %}" class="loader">
+                        </div>
+
+
+                        <!-- End col-sm-6 -->
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-md-5 col-sm-12 col-xs-12">
+                <img alt="" src="{% static 'images/delivery_man.png' %}">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- =-=-=-=-=-=-= Tracking History End =-=-=-=-=-=-= -->
+
+
+{% endblock %}

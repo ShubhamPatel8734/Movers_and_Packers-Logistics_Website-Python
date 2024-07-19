@@ -1,0 +1,112 @@
+{% extends 'driver_header.html' %}
+{% load static %}
+
+{% block content %}
+<div id="main-content">
+    <div id="auth">
+        <section class="row">
+            <div class="col-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <h1 class="auth-title">Driver Profile</h1>
+                        <p class="auth-subtitle mb-5">
+                            See your profile information.
+                        </p>
+
+                        <h5>First Name</h5>
+                        <div class="form-group mb-4">
+                            <input
+                                    type="text"
+                                    name="first_name"
+                                    class="form-control form-control-xl"
+                                    placeholder="First Name"
+                                    value="{{dr.first_name}}"
+                                    readonly
+                            />
+                        </div>
+
+                        <h5>Last Name</h5>
+                        <div class="form-group mb-4">
+                            <input
+                                    type="text"
+                                    name="last_name"
+                                    class="form-control form-control-xl"
+                                    placeholder="Last Name"
+                                    value="{{dr.last_name}}"
+                                    readonly
+                            />
+                        </div>
+
+                        <h5>Username</h5>
+                        <div class="form-group mb-4">
+                            <input
+                                    type="text"
+                                    name="username"
+                                    class="form-control form-control-xl"
+                                    placeholder="Username"
+                                    value="{{dr.username}}"
+                                    readonly
+                            />
+                        </div>
+
+                        <h5>Gender</h5>
+                        <div class="form-group mb-4">
+                            <input
+                                    type="text"
+                                    name="gender"
+                                    class="form-control form-control-xl"
+                                    placeholder="Gender"
+                                    value="{{dr.gender}}"
+                                    readonly
+                            />
+                        </div>
+
+                        <h5>Email</h5>
+                        <div class="form-group mb-4">
+                            <input
+                                    type="email"
+                                    name="dir_email"
+                                    class="form-control form-control-xl"
+                                    placeholder="Email Address"
+                                    value="{{dr.dri_email}}"
+                                    readonly
+                            />
+                        </div>
+
+                        <h5>Contact No.</h5>
+                        <div class="form-group mb-4">
+                            <input
+                                    type="tel"
+                                    name="dri_contact"
+                                    class="form-control form-control-xl"
+                                    placeholder="Contact Number"
+                                    value="{{dr.dri_contact}}"
+                                    readonly
+                            />
+                        </div>
+
+                        <h5>Driving License </h5>
+                        <div class="form-group mb-4">
+                            <input
+                                    type="text"
+                                    name="dri_license"
+                                    class="form-control form-control-xl"
+                                    placeholder="Driving License"
+                                    value="{{dr.dri_license}}"
+                                    readonly
+                            />
+                        </div>
+                        <a href="/driver/driver_edit_profile/">
+                            <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
+                                Edit Profile
+                            </button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

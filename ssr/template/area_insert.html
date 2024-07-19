@@ -1,0 +1,99 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block other %}active{% endblock %}
+
+{% block content %}
+
+<div id="main-content">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+    <div class="page-heading">
+        <section id="basic-horizontal-layouts">
+            <div class="row match-height">
+                <div class="col-md-12 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Area</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form class="form form-horizontal" method="post" action="/i_area/" data-parsley-validate="">
+                                    {% csrf_token %}
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <label>Area Name</label>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <input
+                                                        class="form-control"
+                                                        id="area_name"
+                                                        name="area_name"
+                                                        placeholder="area"
+                                                        type="text"
+                                                        data-parsley-required="true"
+                                                        data-parsley-required-message="Area name is required"
+                                                />
+                                            </div>
+                                            <div class="col-md-10">
+                                                <label>Area Pincode</label>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <input
+                                                        class="form-control"
+                                                        id="area_pincode"
+                                                        name="area_pincode"
+                                                        placeholder="pincode"
+                                                        type="text"
+                                                        minlength="6"
+                                                        maxlength="6"
+                                                        data-parsley-required="true"
+                                                        data-parsley-required-message="Pincode is required"
+                                                />
+                                            </div>
+                                            <div class="col-md-10">
+                                                <label>City ID</label>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="city" name="city">
+                                                        {% for data in ci %}
+
+                                                        <option value="{{data.city_id}}">{{data.city_name}}</option>
+
+                                                        {% endfor %}
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button
+                                                        type="submit"
+                                                        class="btn btn-primary me-1 mb-1"
+                                                >
+                                                    Submit
+                                                </button>
+                                                <button
+                                                        type="reset"
+                                                        class="btn btn-light-secondary me-1 mb-1"
+                                                >
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

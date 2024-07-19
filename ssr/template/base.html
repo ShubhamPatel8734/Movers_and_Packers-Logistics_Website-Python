@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {% include 'base/bootstrap_defaults.html' %}
+</head>
+<body>
+<div class='container'>
+    <div class='row'>
+        <div class='col-sm-12' url-endpoint='{% url "api-data" %}'>
+            <div class='col-sm-12'>
+                <canvas id="myChart2" width="300" height="300"></canvas>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+{% include 'base/js.html' %}
+<script>
+    $(document).ready(function(){
+      {% block jquery %}{% endblock %}
+    })
+
+</script>
+</body>
+</html>

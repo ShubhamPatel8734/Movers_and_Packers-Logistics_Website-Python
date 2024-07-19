@@ -1,0 +1,129 @@
+{% extends 'driver_header.html' %}
+{% load static %}
+{% block booking %}active{% endblock %}
+
+{% block content %}
+<div id="main-content">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+    <!--    <div class="page-heading">-->
+    <!--        <h3>Profile Statistics</h3>-->
+    <!--    </div>-->
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-16">
+
+                <div class="row">
+
+
+                    <div class="page-heading">
+                        <div class="page-title">
+                            <div class="row">
+                                <div class="col-12 col-md-6 order-md-1 order-last">
+                                    <h3>Your Bookings</h3>
+                                    <!--<p class="text-subtitle text-muted">
+                                        A sortable, searchable, paginated table without dependencies
+                                        thanks to simple-datatables.
+                                    </p>-->
+                                </div>
+                            </div>
+                        </div>
+                        <section class="section">
+                            <div class="card">
+                                <div class="card-header">Bookings Table</div>
+                                <div class="card-body">
+                                    <table class="table table-striped" id="table1">
+                                        <thead>
+                                        <tr>
+                                            <th>&emsp;Booking</th>
+                                            <th>&emsp;ID&emsp;</th>
+                                            <th>Date</th>
+                                            <th>Pickup_Address</th>
+                                            <th>Drop_Address</th>
+                                            <th>Approx_km</th>
+                                            <th>Amount</th>
+                                            <th>Payment_Status</th>
+                                            <th>Payment_Type</th>
+                                            <th>Customer</th>
+                                            <th>Vehicle</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for data in bo %}
+
+                                        <tr>
+                                            <td>
+                                                {% if data.booking == 1 %}
+                                                <!--                                                <div class="col-sm-12 d-flex justify-content-end">-->
+                                                <form method="post" action="/driver/driver_booking_complete/{{data.book_id}}" data-parsley-validate="">
+                                                    {% csrf_token %}
+                                                    <input type="text" name="verification" size="7"
+                                                        data-parsley-required="true"
+                                                        data-parsley-required-message="OTP is required"/>
+                                                    <br/>
+                                                    {% for data in messages %}
+
+                                                        <span style="color:red"> {{data}} </span>
+
+                                                    {% endfor %}
+                                                    <br/>
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">
+                                                        Shipped
+                                                    </button>
+                                                </form>
+                                                <!--                                                </div>-->
+                                                {% elif data.booking == 3 %}
+                                                <span class="badge bg-light-info">Shipped</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>&emsp;{{data.book_id}}</td>
+                                            <td>{{data.book_date_time}}</td>
+                                            <td>{{data.pickup_address}}</td>
+                                            <td>{{data.drop_address}}</td>
+                                            <td>&emsp;&emsp;{{data.approx_km}}</td>
+                                            <td>{{data.amount}}Rs.</td>
+                                            <td>
+                                                {% if data.payment_status == 1 %}
+                                                &emsp;&emsp;<span class="badge bg-light-success">Success</span>
+                                                {% else %}
+                                                &emsp;&emsp;<span class="badge bg-light-secondary">Pending</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if data.payment_type == 1 %}
+                                                &nbsp;&nbsp;&emsp;<span class="badge bg-light-info">Online</span>
+                                                {% elif data.payment_type == 2 %}
+                                                &emsp;&emsp;<span class="badge bg-light-success">Cash</span>
+                                                {% else %}
+                                                &nbsp;&nbsp;
+                                                {% endif %}
+                                            </td>
+
+                                            <td>{{data.cust.username}}</td>
+
+                                            <td>{{data.veh.cate.cate_type}}</td>
+                                        </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+
+            </div>
+            <!--</div>-->
+
+        </section>
+    </div>
+</div>
+{% endblock %}

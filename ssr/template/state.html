@@ -1,0 +1,72 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block other %}active{% endblock %}
+
+{% block content %}
+
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>State Table</h3>
+                    <p class="text-subtitle text-muted">
+
+                    </p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav
+                            aria-label="breadcrumb"
+                            class="breadcrumb-header float-start float-lg-end"
+                    >
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/index/">Dashboard</a>
+                            </li>
+<!--                            <li class="breadcrumb-item active" aria-current="page">-->
+<!--                                StateTable-->
+<!--                            </li>-->
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>&emsp;Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for data in st %}
+
+                        <tr>
+                            <td>{{data.state_id}}</td>
+                            <td>{{data.state_name}}</td>
+                            <td>
+                                <a href="/d_state/{{data.state_id}}"><svg viewBox="0 0 24 24" height="40px" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 6.77273H9.2M19 6.77273H14.8M9.2 6.77273V5.5C9.2 4.94772 9.64772 4.5 10.2 4.5H13.8C14.3523 4.5 14.8 4.94772 14.8 5.5V6.77273M9.2 6.77273H14.8M6.4 8.59091V15.8636C6.4 17.5778 6.4 18.4349 6.94673 18.9675C7.49347 19.5 8.37342 19.5 10.1333 19.5H13.8667C15.6266 19.5 16.5065 19.5 17.0533 18.9675C17.6 18.4349 17.6 17.5778 17.6 15.8636V8.59091M9.2 10.4091V15.8636M12 10.4091V15.8636M14.8 10.4091V15.8636" stroke="#435EBE" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></a>&nbsp;
+                                <a href="/u_state/{{data.state_id}}"><svg viewBox="0 0 24 24" height="30px" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.05939 10.8927C2.59723 5.90964 6.72911 2 11.7875 2C14.6474 2 17.2148 3.25301 19 5.23997V4C19 3.44772 19.4477 3 20 3C20.5523 3 21 3.44772 21 4V8C21 8.26522 20.8946 8.51957 20.7071 8.70711C20.5195 8.89464 20.2652 9 20 9L16 9C15.4477 9 15 8.55228 15 8C15 7.44771 15.4477 7 16 7L17.867 7C16.4351 5.16504 14.2403 4 11.7875 4C7.79954 4 4.4814 7.09046 4.04784 11.1073C3.98857 11.6564 3.4954 12.0535 2.9463 11.9942C2.3972 11.935 2.00012 11.4418 2.05939 10.8927ZM21.0537 12.0058C21.6028 12.065 21.9999 12.5582 21.9406 13.1073C21.4028 18.0904 17.2709 22 12.2125 22C9.35262 22 6.78516 20.747 4.99998 18.76V20C4.99998 20.5523 4.55227 21 3.99998 21C3.4477 21 2.99998 20.5523 2.99998 20L2.99998 16C2.99998 15.7348 3.10534 15.4804 3.29287 15.2929C3.48041 15.1054 3.73476 15 3.99998 15L7.99998 15C8.55227 15 8.99998 15.4477 8.99998 16C8.99998 16.5523 8.55227 17 7.99998 17H6.13297C7.56485 18.835 9.75975 20 12.2125 20C16.2005 20 19.5186 16.9095 19.9522 12.8927C20.0114 12.3436 20.5046 11.9465 21.0537 12.0058Z" fill="#435EBE"></path> </g></svg><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.05939 10.8927C2.59723 5.90964 6.72911 2 11.7875 2C14.6474 2 17.2148 3.25301 19 5.23997V4C19 3.44772 19.4477 3 20 3C20.5523 3 21 3.44772 21 4V8C21 8.26522 20.8946 8.51957 20.7071 8.70711C20.5195 8.89464 20.2652 9 20 9L16 9C15.4477 9 15 8.55228 15 8C15 7.44771 15.4477 7 16 7L17.867 7C16.4351 5.16504 14.2403 4 11.7875 4C7.79954 4 4.4814 7.09046 4.04784 11.1073C3.98857 11.6564 3.4954 12.0535 2.9463 11.9942C2.3972 11.935 2.00012 11.4418 2.05939 10.8927ZM21.0537 12.0058C21.6028 12.065 21.9999 12.5582 21.9406 13.1073C21.4028 18.0904 17.2709 22 12.2125 22C9.35262 22 6.78516 20.747 4.99998 18.76V20C4.99998 20.5523 4.55227 21 3.99998 21C3.4477 21 2.99998 20.5523 2.99998 20L2.99998 16C2.99998 15.7348 3.10534 15.4804 3.29287 15.2929C3.48041 15.1054 3.73476 15 3.99998 15L7.99998 15C8.55227 15 8.99998 15.4477 8.99998 16C8.99998 16.5523 8.55227 17 7.99998 17H6.13297C7.56485 18.835 9.75975 20 12.2125 20C16.2005 20 19.5186 16.9095 19.9522 12.8927C20.0114 12.3436 20.5046 11.9465 21.0537 12.0058Z" fill="#0c48d4"></path> </g></svg></a>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                    <div class="col-sm-12 d-flex justify-content-end">
+                        <a href="/i_state/" class="btn btn-primary me-1 mb-1">Insert</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,293 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block booking %}active{% endblock %}
+
+{% block content %}
+
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Booking Table</h3>
+                    <p class="text-subtitle text-muted">
+
+                    </p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav
+                            aria-label="breadcrumb"
+                            class="breadcrumb-header float-start float-lg-end"
+                    >
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/index/">Dashboard</a>
+                            </li>
+                            <!--                            <li class="breadcrumb-item active" aria-current="page">-->
+                            <!--                                BookingTable-->
+                            <!--                            </li>-->
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Pickup_Address</th>
+                            <th>Drop_Address</th>
+                            <th>Approx_KM</th>
+                            <th>Amount</th>
+                            <th>Booking</th>
+                            <th>Verification</th>
+                            <th>Payment_Status</th>
+                            <th>Payment_Type</th>
+                            <th>Customer</th>
+                            <th>Driver</th>
+                            <th>Vehicle</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for data in bo %}
+
+                        <tr>
+                            <td>{{data.book_id}}</td>
+                            <td>{{data.book_date_time}}</td>
+                            <td>{{data.pickup_address}}</td>
+                            <td>{{data.drop_address}}</td>
+                            <td>&emsp;&emsp;{{data.approx_km}}</td>
+                            <td>{{data.amount}}Rs.</td>
+                            <td>
+                                {% if data.booking == 1 %}
+                                <span class="badge bg-light-success">Accepted</span>
+                                {% elif data.booking == 2 %}
+                                <span class="badge bg-light-danger">Rejected</span>
+                                {% elif data.booking == 3 %}
+                                <span class="badge bg-light-info">Shipped</span>
+                                {% elif data.booking == 0 %}
+                                <a href="/accept_booking/{{ data.book_id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                         fill="none" stroke="green" stroke-width="2.5" stroke-linecap="round"
+                                         stroke-linejoin="bevel">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </a>&nbsp;&nbsp;
+                                <a href="/reject_booking/{{ data.book_id }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                         fill="none" stroke="red" stroke-width="2.5" stroke-linecap="round"
+                                         stroke-linejoin="bevel">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </a>
+                                {% endif %}
+                            </td>
+                            <!--                            <td>-->
+                            <!--                                {% if data.booking == 0 %}-->
+                            <!--                                <span class="label label-primary label-transparent">Pending</span>-->
+                            <!--                                {% endif %}-->
+                            <!--                                {% if data.booking == 1 %}-->
+                            <!--                                <span class="label label-success label-transparent">Accept</span>-->
+                            <!--                                {% endif %}-->
+                            <!--                                {% if data.booking == 2 %}-->
+                            <!--                                <span class="label label-danger  label-transparent">Rejected</span>-->
+                            <!--                                {% endif %}-->
+                            <!--                            </td>-->
+                            <td>{{data.otp}}</td>
+                            <td>
+                                    {% if data.payment_status == 1 %}
+                                    &emsp;&emsp;<span class="badge bg-light-success">Success</span>
+                                    {% else %}
+                                    &emsp;&emsp;<span class="badge bg-light-secondary">Pending</span>
+                                    {% endif %}
+                            </td>
+                            <td>
+                                {% if data.payment_type == 1 %}
+                                &nbsp;&nbsp;&emsp;<span class="badge bg-light-info">Online</span>
+                                {% elif data.payment_type == 2 %}
+                                &emsp;&emsp;<span class="badge bg-light-success">Cash</span>
+                                {% else %}
+                                &nbsp;&nbsp;
+                                {% endif %}</td>
+
+
+
+
+                            <td>{{data.cust.username}}</td>
+
+
+
+                            <td>
+<!--                                <a href="#">-->
+                                {% if data.dri_id != null %}
+                                    {{data.dri.first_name}} {{data.dri.last_name}}
+                                {% else %}
+                                    {% if data.booking == 1 and data.book_date_time == date %}
+                                <a href="/driver1/{{data.book_id}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" data-bs-toggle="modal"
+                                         data-bs-target="#inlineForm" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         version="1.1" x="0px" y="0px" viewBox="0 0 50 50"
+                                         style="enable-background:new 0 0 40 40;" xml:space="preserve">
+                                                                <g id="Layer_1">
+                                                                    <g>
+                                                                        <path style="fill:#B6DCFE;"
+                                                                              d="M9.404,38.5l-3.335-0.463c-1.436-0.173-2.592-0.954-3.18-2.144c-0.55-1.113-0.5-2.419,0.134-3.494    C5.343,28.467,10.255,24.5,16,24.5h8c5.734,0,10.648,3.966,12.974,7.896c0.664,1.122,0.718,2.467,0.144,3.6    c-0.585,1.155-1.739,1.898-3.167,2.039L30.562,38.5H9.404z"/>
+                                                                        <g>
+                                                                            <path style="fill:#4788C7;"
+                                                                                  d="M24,25c5.537,0,10.29,3.843,12.544,7.651c0.576,0.974,0.624,2.14,0.128,3.12     c-0.514,1.014-1.498,1.642-2.808,1.772L30.528,38H9.472L6.12,37.539c-1.257-0.152-2.271-0.832-2.783-1.868     c-0.475-0.961-0.431-2.089,0.117-3.018C5.701,28.844,10.452,25,16,25H24 M24,24h-8c-5.623,0-10.767,3.669-13.407,8.145     C1.07,34.725,2.625,38.125,6,38.532L9.404,39h21.192L34,38.533c3.5-0.346,4.932-3.812,3.404-6.391C34.756,27.667,29.598,24,24,24     L24,24z"/>
+                                                                        </g>
+                                                                    </g>
+                                                                    <polygon style="fill:#B6DCFE;"
+                                                                             points="30.656,36.286 9.516,36.286 9.404,39 30.596,39  "/>
+                                                                    <path style="fill:#4788C7;"
+                                                                          d="M12.536,39c-0.822-0.78-1.286-1.656-1.286-2.5c0-0.784,0.403-1.597,1.119-2.335l4.114,2.743   c-0.143,0.264-0.234,0.545-0.234,0.842c0,0.458,0.198,0.881,0.52,1.25h6.46c0.322-0.369,0.52-0.792,0.52-1.25   c0-0.297-0.091-0.578-0.234-0.842l4.114-2.743c0.717,0.738,1.119,1.55,1.119,2.335c0,0.844-0.464,1.72-1.286,2.5h3.132   c0.416-0.783,0.654-1.622,0.654-2.5c0-4.142-5.037-7.5-11.25-7.5S8.75,32.358,8.75,36.5c0,0.878,0.238,1.717,0.654,2.5H12.536z    M20,31.5c2.118,0,3.966,0.449,5.416,1.137l-4.153,2.769C20.867,35.311,20.445,35.25,20,35.25s-0.867,0.061-1.263,0.156   l-4.153-2.769C16.034,31.949,17.882,31.5,20,31.5z"/>
+                                                                    <g>
+                                                                        <path style="fill:#DFF0FE;"
+                                                                              d="M20,27.5c-3.076,0-4.297-2.626-4.5-3.123V19.91h9v4.468C24.297,24.874,23.076,27.5,20,27.5z"/>
+                                                                        <path style="fill:#4788C7;"
+                                                                              d="M24,20.41v3.865C23.737,24.865,22.607,27,20,27c-2.611,0-3.741-2.141-4-2.725V20.41H24 M25,19.41    H15v5.062c0,0,1.267,3.529,5,3.529s5-3.529,5-3.529V19.41L25,19.41z"/>
+                                                                    </g>
+                                                                    <g>
+                                                                        <g>
+                                                                            <path style="fill:#DFF0FE;"
+                                                                                  d="M26.429,17.643c-1.143,0-2.072-0.929-2.072-2.071s0.929-2.071,2.072-2.071     c1.725,0,2.071,0.465,2.071,1.214C28.5,15.966,27.476,17.643,26.429,17.643z M13.571,17.643c-1.047,0-2.071-1.677-2.071-2.928     c0-0.75,0.347-1.214,2.071-1.214c1.143,0,2.072,0.929,2.072,2.071S14.714,17.643,13.571,17.643z"/>
+                                                                        </g>
+                                                                        <g>
+                                                                            <path style="fill:#4788C7;"
+                                                                                  d="M26.429,14C28,14,28,14.363,28,14.714c0,1.044-0.896,2.429-1.571,2.429     c-0.867,0-1.571-0.705-1.571-1.571S25.562,14,26.429,14 M13.571,14c0.867,0,1.571,0.705,1.571,1.571s-0.705,1.571-1.571,1.571     c-0.676,0-1.571-1.384-1.571-2.429C12,14.363,12,14,13.571,14 M26.429,13c-1.42,0-2.571,1.151-2.571,2.571     s1.151,2.571,2.571,2.571c1.42,0,2.571-2.008,2.571-3.429S27.849,13,26.429,13L26.429,13z M13.571,13     C12.151,13,11,13.294,11,14.714s1.151,3.429,2.571,3.429c1.42,0,2.571-1.151,2.571-2.571S14.992,13,13.571,13L13.571,13z"/>
+                                                                        </g>
+                                                                    </g>
+                                                                    <g>
+                                                                        <g>
+                                                                            <path style="fill:#FFFFFF;"
+                                                                                  d="M20,24.5c-0.58,0-1.134-0.224-1.56-0.631l-0.09-0.086l-0.12-0.034     c-2.785-0.788-4.73-3.357-4.73-6.25V9.364c0-1.564,1.272-2.836,2.836-2.836h7.328c1.564,0,2.836,1.272,2.836,2.836V17.5     c0,2.893-1.945,5.462-4.73,6.25l-0.12,0.034l-0.09,0.086C21.134,24.276,20.58,24.5,20,24.5z"/>
+                                                                        </g>
+                                                                        <g>
+                                                                            <path style="fill:#4788C7;"
+                                                                                  d="M23.664,7.028C24.952,7.028,26,8.076,26,9.364V17.5c0,2.67-1.796,5.042-4.367,5.768l-0.239,0.068     l-0.18,0.172C20.882,23.825,20.451,24,20,24s-0.882-0.175-1.215-0.492l-0.18-0.172l-0.239-0.068C15.796,22.542,14,20.17,14,17.5     V9.364c0-1.288,1.048-2.336,2.336-2.336H23.664 M23.664,6.028h-7.328C14.494,6.028,13,7.521,13,9.364V17.5     c0,3.205,2.156,5.9,5.095,6.731C18.591,24.705,19.26,25,20,25s1.409-0.295,1.905-0.769C24.844,23.4,27,20.705,27,17.5V9.364     C27,7.521,25.506,6.028,23.664,6.028L23.664,6.028z"/>
+                                                                        </g>
+                                                                    </g>
+                                                                    <g>
+                                                                        <path style="fill:#B6DCFE;"
+                                                                              d="M26.5,15.5V12c0-3.483-2.217-4.425-2.312-4.463l-0.343-0.139l-0.234,0.288    C23.589,7.713,21.283,10.5,18,10.5c-0.264,0-0.529-0.009-0.791-0.017c-0.265-0.008-0.526-0.017-0.778-0.017    c-0.877,0-2.931,0-2.931,2.534v2.5h-0.214c-0.44-0.773-1.786-3.349-1.786-5.924C11.5,4.821,14.995,1.5,20,1.5    c3.078,0,4.499,2.621,4.557,2.732l0.119,0.225l0.253,0.038C26.462,4.714,28.5,5.524,28.5,10c0,2.329-1.338,4.761-1.779,5.5H26.5z"/>
+                                                                        <g>
+                                                                            <path style="fill:#4788C7;"
+                                                                                  d="M20,2c2.762,0,4.062,2.367,4.114,2.463l0.237,0.454l0.507,0.073C26.321,5.199,28,5.958,28,10     c0,1.395-0.515,2.842-1,3.894V12c0-3.816-2.516-4.883-2.623-4.926l-0.687-0.279l-0.467,0.577C23.201,7.397,21.06,10,18,10     c-0.259,0-0.519-0.008-0.775-0.017c-0.27-0.009-0.537-0.017-0.794-0.017C15.582,9.966,13,9.966,13,13v0.807     c-0.486-1.122-1-2.676-1-4.23C12,5.115,15.29,2,20,2 M20,1c-5.36,0-9,3.667-9,8.576C11,12.828,13,16,13,16h1c0,0,0-2.105,0-3     c0-1.791,1.085-2.034,2.431-2.034C16.932,10.966,17.469,11,18,11c3.573,0,6-3,6-3s2,0.813,2,4c0,0.984,0,4,0,4h1c0,0,2-3.037,2-6     c0-4.161-1.703-5.671-4-6C25,4,23.434,1,20,1L20,1z"/>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                        <g id="Layer_2">
+                                                                </g>
+                                                                </svg>
+                                </a>
+                                    {% endif %}
+                                {% endif %}
+<!--                                </a>-->
+
+                                <!--login form Modal -->
+<!--                                <div-->
+<!--                                        class="modal fade text-left"-->
+<!--                                        id="inlineForm"-->
+<!--                                        tabindex="-1"-->
+<!--                                        role="dialog"-->
+<!--                                        aria-labelledby="myModalLabel33"-->
+<!--                                        aria-hidden="true"-->
+<!--                                >-->
+<!--                                    <div-->
+<!--                                            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"-->
+<!--                                            role="document"-->
+<!--                                    >-->
+<!--                                        <div class="modal-content">-->
+<!--                                            <div class="modal-header">-->
+<!--                                                <h4 class="modal-title" id="myModalLabel33">-->
+<!--                                                    Drivers-->
+<!--                                                </h4>-->
+<!--                                                <button-->
+<!--                                                        type="button"-->
+<!--                                                        class="close"-->
+<!--                                                        data-bs-dismiss="modal"-->
+<!--                                                        aria-label="Close"-->
+<!--                                                >-->
+<!--                                                    <i data-feather="x"></i>-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                            <form method="post">-->
+<!--                                                {% csrf_token %}-->
+<!--                                                <div class="modal-body">-->
+<!--                                                    <label>Driver : </label>-->
+<!--                                                    <div class="col-md-12 form-group">-->
+<!--                                                        <fieldset class="form-group">-->
+<!--                                                            <select class="form-select" id="dri" name="dri">-->
+<!--                                                                {% for data in dr %}-->
+
+<!--                                                                <option value="{{data.dri_id}}">{{data.first_name}} {{data.last_name}}-->
+<!--                                                                </option>-->
+
+<!--                                                                {% endfor %}-->
+<!--                                                            </select>-->
+<!--                                                        </fieldset>-->
+<!--                                                    </div>-->
+<!--&lt;!&ndash;                                                    <label>Password: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <input&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                type="password"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                placeholder="Password"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                                class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        />&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </div>&ndash;&gt;-->
+<!--                                                </div>-->
+<!--                                                <div class="modal-footer">-->
+<!--&lt;!&ndash;                                                    <button&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            class="btn btn-light-secondary"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            data-bs-dismiss="modal"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    >&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <i class="bx bx-x d-block d-sm-none"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        <span class="d-none d-sm-block">Close</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    </button>&ndash;&gt;-->
+
+<!--                                                    <a href="/driver/{{data.book_id}}">-->
+<!--                                                    <button-->
+<!--                                                            type="button"-->
+<!--                                                            class="btn btn-primary ml-1"-->
+<!--                                                            data-bs-dismiss="modal"-->
+<!--                                                    >-->
+<!--                                                        <i-->
+<!--                                                                class="bx bx-check d-block d-sm-none"-->
+<!--                                                        ></i>-->
+<!--                                                        <span class="d-none d-sm-block">OK</span>-->
+<!--                                                    </button>-->
+<!--                                                        </a>-->
+<!--                                                </div>-->
+<!--                                            </form>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </td>
+
+
+
+                            <td>{{data.veh.cate.cate_type}}</td>
+
+
+
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

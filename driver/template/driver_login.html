@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<!-- Mirrored from zuramai.github.io/mazer/demo/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 23:10:57 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login - Mazer Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'assets/css/main/app.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets/css/pages/auth.css' %}"/>
+    <link
+            rel="shortcut icon"
+            href="{% static 'assets/images/logo/favicon.svg' %}"
+            type="image/x-icon"
+    />
+    <link
+            rel="shortcut icon"
+            href="{% static 'assets/images/logo/favicon.png' %}"
+            type="image/png"
+    />
+</head>
+
+<body>
+<div id="auth">
+    <div class="row h-100">
+        <div class="col-lg-12 col-12">
+            <div id="auth-left">
+                <div class="logo">
+                    <a href="#"
+                    ><img width="160px" height="80px" src="{% static 'images/M&P.png' %}" alt="Company's Logo">
+                    </a>
+                </div>
+                <br/>
+                <br/>
+                <h1 class="auth-title">Log in with Driver.</h1>
+                <p class="auth-subtitle mb-5">
+                    Log in with your data.
+                </p>
+
+                <form method="POST" action="/driver/driver_login/">
+                    {% csrf_token %}
+
+                    <div class="form-group position-relative has-icon-left mb-4">
+
+                        <input
+                                id="dri_email"
+                                name="dri_email"
+                                value="{{driver_email_cookie1}}"
+                                type="email"
+                                class="form-control form-control-xl"
+                                placeholder="Driver Email"
+                                required autofocus
+                        />
+                        <div class="form-control-icon">
+                            <i class="bi bi-person"></i>
+                        </div>
+                    </div>
+                    <div class="form-group position-relative has-icon-left mb-4">
+                        <input
+                                id="password"
+                                name="password"
+                                value="{{driver_password_cookie2}}"
+                                type="password"
+                                class="form-control form-control-xl"
+                                placeholder="Password"
+                        />
+                        <div class="form-control-icon">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                    </div>
+                    <div class="form-check form-check-lg d-flex align-items-end">
+                        <input
+                                class="form-check-input me-2"
+                                type="checkbox"
+                                name="remember"
+                                id="flexCheckDefault"
+                        />
+                        <label
+                                class="form-check-label text-gray-600"
+                                for="flexCheckDefault"
+                        >
+                            Keep me logged in
+                        </label>
+                    </div>
+                    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
+                        Log in
+                    </button>
+
+                    {% for data in messages %}
+
+                    <span style="color:red"> {{data}} </span>
+
+                    {% endfor %}
+
+                </form>
+
+                <div class="text-center mt-5 text-lg fs-4">
+                    <p>
+                        Don't have an account?
+                        <a class="font-bold" href="/driver/driver_register/"
+                        >Sign Up</a
+                        >
+                    </p>
+                    <p>
+                        <a class="font-bold" href="/driver/driver_forgot_password/"
+                        >Forgot password?</a
+                        >
+                    </p>
+                </div>
+
+            </div>
+        </div>
+<!--        <div class="col-lg-7 d-none d-lg-block">-->
+<!--            <div id="auth-right"></div>-->
+<!--        </div>-->
+    </div>
+</div>
+</body>
+
+<!-- Mirrored from zuramai.github.io/mazer/demo/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 23:10:58 GMT -->
+</html>

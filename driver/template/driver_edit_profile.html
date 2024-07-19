@@ -1,0 +1,156 @@
+{% extends 'driver_header.html' %}
+{% load static %}
+
+{% block content %}
+<div id="main-content" xmlns:text-align="http://www.w3.org/1999/xhtml">
+    <div id="auth">
+        <section class="row">
+            <div class="col-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <!--                        <div id="auth-left">-->
+                        <!--                    <div class="auth-logo">-->
+                        <!--                        <a href="index.html"-->
+                        <!--                        ><img src="{% static 'assets/images/logo/logo.svg' %}" alt="Logo"-->
+                        <!--                        /></a>-->
+                        <!--                    </div>-->
+                        <h1 class="auth-title">Edit Driver Profile</h1>
+                        <p class="auth-subtitle mb-5">
+                            Manage your profile information.<br>
+                            You can change your password.
+                        </p>
+
+                        <form method="post" action="/driver/driver_edit_profile/{{dr.id1}}" data-parsley-validate="">
+                            {% csrf_token %}
+
+                            <h5>First Name</h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="text"
+                                        name="first_name"
+                                        class="form-control form-control-xl"
+                                        placeholder="First Name"
+                                        value="{{dr.first_name}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="First name is required"
+                                />
+                            </div>
+
+                            <h5>Last Name</h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="text"
+                                        name="last_name"
+                                        class="form-control form-control-xl"
+                                        placeholder="Last Name"
+                                        value="{{dr.last_name}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Last name is required"
+                                />
+                            </div>
+
+                            <h5>Username</h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="text"
+                                        name="username"
+                                        class="form-control form-control-xl"
+                                        placeholder="Username"
+                                        value="{{dr.username}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Username is required"
+                                />
+                            </div>
+
+                            <h5>Gender</h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="text"
+                                        name="gender"
+                                        class="form-control form-control-xl"
+                                        placeholder="Gender"
+                                        value="{{dr.gender}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Gender is required"
+                                />
+                            </div>
+
+                            <h5>Email</h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="email"
+                                        name="dri_email"
+                                        class="form-control form-control-xl"
+                                        placeholder="Email Address"
+                                        value="{{dr.dri_email}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Email is required"
+                                />
+                            </div>
+
+                            <h5>Contact No.</h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="tel"
+                                        name="dri_contact"
+                                        class="form-control form-control-xl"
+                                        placeholder="Contact Number"
+                                        pattern="[6-9]{1}[0-9]{9}"
+                                        value="{{dr.dri_contact}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Contact number is required"
+                                />
+                            </div>
+
+                            <h5>Password</h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="password"
+                                        name="password"
+                                        class="form-control form-control-xl"
+                                        placeholder="Password"
+                                        value="{{dr.password}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Password is required"
+                                />
+                            </div>
+
+                            <h5>Driving License </h5>
+                            <div class="form-group mb-4">
+                                <input
+                                        type="text"
+                                        name="dri_license"
+                                        class="form-control form-control-xl"
+                                        placeholder="Driving License"
+                                        value="{{dr.dri_license}}"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Driver License is required"
+                                />
+                            </div>
+
+<!--                            <div class="form-group mb-4">-->
+<!--                                <input-->
+<!--                                        type="text"-->
+<!--                                        name="is_admin"-->
+<!--                                        class="form-control form-control-xl"-->
+<!--                                        placeholder="Is Admin"-->
+<!--                                        value="{{dr.is_admin}}"-->
+<!--                                        required-->
+<!--                                        hidden-->
+<!--                                />-->
+<!--                            </div>-->
+                            <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">
+                                Update My Info.
+                            </button>
+                        </form>
+                        <!--                    </div>-->
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

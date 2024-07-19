@@ -1,0 +1,72 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block feedback %}active{% endblock %}
+
+{% block content %}
+
+<div id="main-content">
+    <div class="page-heading">
+        <div class="page-title">
+            <div class="row">
+                <div class="col-12 col-md-6 order-md-1 order-last">
+                    <h3>Feedback Table</h3>
+                    <p class="text-subtitle text-muted">
+
+                    </p>
+                </div>
+                <div class="col-12 col-md-6 order-md-2 order-first">
+                    <nav
+                            aria-label="breadcrumb"
+                            class="breadcrumb-header float-start float-lg-end"
+                    >
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/index/">Dashboard</a>
+                            </li>
+<!--                            <li class="breadcrumb-item active" aria-current="page">-->
+<!--                                FeedbackTable-->
+<!--                            </li>-->
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <section class="section">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Customer</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for data in fe %}
+
+                        <tr>
+                            <td>{{data.feed_id}}</td>
+                            <td>{{data.feed_desc}}</td>
+                            <td>{{data.feed_date}}</td>
+                            <td>{{data.cust.first_name}} {{data.cust.last_name}}</td>
+                            <td>
+                                <a href="/d_feedback/{{data.feed_id}}"><svg viewBox="0 0 24 24" height="40px" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 6.77273H9.2M19 6.77273H14.8M9.2 6.77273V5.5C9.2 4.94772 9.64772 4.5 10.2 4.5H13.8C14.3523 4.5 14.8 4.94772 14.8 5.5V6.77273M9.2 6.77273H14.8M6.4 8.59091V15.8636C6.4 17.5778 6.4 18.4349 6.94673 18.9675C7.49347 19.5 8.37342 19.5 10.1333 19.5H13.8667C15.6266 19.5 16.5065 19.5 17.0533 18.9675C17.6 18.4349 17.6 17.5778 17.6 15.8636V8.59091M9.2 10.4091V15.8636M12 10.4091V15.8636M14.8 10.4091V15.8636" stroke="#435EBE" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></a><br/><br/>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'client_header.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- =-=-=-=-=-=-= PAGE BREADCRUMB =-=-=-=-=-=-= -->
+<section class="breadcrumbs-area parallex">
+    <div class="container">
+        <div class="row">
+            <div class="page-title">
+                <div class="col-sm-12 col-md-6 page-heading text-left">
+                    <h3>create your account</h3>
+                    <h2>Sign Up</h2>
+                </div>
+                <!--                    <div class="col-sm-12 col-md-6 text-right">-->
+                <!--                        <ul class="breadcrumbs">-->
+                <!--                            <li><a href="#">home</a></li>-->
+                <!--                            <li><a href="#">pages</a></li>-->
+                <!--                            <li><a href="#">sign up</a></li>-->
+                <!--                        </ul>-->
+                <!--                    </div>-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= -->
+<!--"cust_id","first_name","last_name","username","gender","cust_email","address","cust_contact","password","is_admin","area"]-->
+
+<!-- =-=-=-=-=-=-= Sign UP Section =-=-=-=-=-=-= -->
+
+<section class="section-padding-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
+                <form class="registration" method="post" action="/client/client_register/" data-parsley-validate="">
+                    {% csrf_token %}
+
+
+                    <div class="box-header">
+                        <h2>Register a new account</h2>
+                        <p>Already Signed Up? Click <a href="/client/client_login/">Sign In</a> to login your account.</p>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label>First Name <span style="color:red">*</span></label>
+                            <input type="text" id="first_name" name="first_name" class="form-control margin-bottom-20"
+                                   placeholder="Enter Your Name"
+                                   data-parsley-required="true"
+                                   data-parsley-required-message="First name is required">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Last Name <span style="color:red">*</span></label>
+                            <input type="text" id="last_name" name="last_name" class="form-control margin-bottom-20"
+                                   placeholder="Enter Your Surname"
+                                   data-parsley-required="true"
+                                   data-parsley-required-message="Last name is required">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>User Name <span style="color:red">*</span></label>
+                            <input type="text" id="username" name="username" class="form-control margin-bottom-20"
+                                   placeholder="Enter User Name"
+                                   data-parsley-required="true"
+                                   data-parsley-required-message="Username is required">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Email <span style="color:red">*</span></label>
+                            <input type="email" id="cust_email" name="cust_email" class="form-control margin-bottom-20"
+                                   placeholder="Enter Your Email"
+                                   data-parsley-required="true"
+                                   data-parsley-required-message="Email is required">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Contact Number <span style="color:red">*</span></label>
+                            <input type="tel" id="cust_contact" name="cust_contact" pattern="[6-9]{1}[0-9]{9}"
+                                   class="form-control margin-bottom-20" placeholder="Enter Contact Number"
+                                   data-parsley-required="true"
+                                   data-parsley-required-message="Contact number is required">
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label>Gender <span style="color:red">*</span></label>
+                            <input type="gender" id="gender" name="gender" class="form-control margin-bottom-20"
+                                   placeholder="Enter Gender"
+                                   data-parsley-required="true"
+                                   data-parsley-required-message="Gender is required">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Password <span style="color:red">*</span></label>
+                            <input type="password" id="password" name="password" class="form-control margin-bottom-20"
+                                   placeholder="Enter Password"
+                                   data-parsley-required="true"
+                                   data-parsley-required-message="Password is required">
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Address <span style="color:red">*</span></label>
+                            <textarea name="address" id="address" maxlength="100"
+                                      class = "form-control margin-bottom-20" rows = "1" placeholder="Enter Address"
+                                      data-parsley-required="true"
+                                      data-parsley-required-message="Address is required"></textarea>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <label>Area <span style="color:red">*</span></label>
+						    <select class="form-control" name="area" id="area">
+
+                                <option disabled="true" selected>-- Select your area --</option>
+							    {% for data in ar %}
+
+                                    <option value="{{data.area_id}}">{{data.area_name}}</option>
+
+                                {% endfor %}
+							</select>
+						</div>
+                        <div class="col-sm-6">
+<!--                            <label>Role to be perform <span style="color:red">*</span></label>-->
+                            <input type="hidden" id="is_admin" name="is_admin" class="form-control margin-bottom-20"
+                                   placeholder="is_admin" value="1" required>
+                        </div>
+<!--                        <div class="col-sm-6">-->
+<!--                            <label>Role to be perform <span style="color:red">*</span></label>-->
+<!--                            <select class="form-control" name="is_admin" id="is_admin" required>-->
+<!--                                <option disabled="true" selected>&#45;&#45; Select your role &#45;&#45;</option>-->
+<!--                                <option value="1">Customer</option>-->
+<!--                                <option value="2">Driver</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-7 col-sm-4 col-xs-12 text-right">
+                            <button type="submit" class="btn btn-primary btn-sm">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

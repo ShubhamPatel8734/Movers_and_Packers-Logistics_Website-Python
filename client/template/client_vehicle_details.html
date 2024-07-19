@@ -1,0 +1,109 @@
+﻿{% extends 'client_header.html' %}
+{% load static %}
+{% block vehicles %}active{% endblock %}
+
+{% block content %}
+    <!-- =-=-=-=-=-=-= PAGE BREADCRUMB =-=-=-=-=-=-= -->
+    <section class="breadcrumbs-area parallex">
+        <div class="container">
+            <div class="row">
+                <div class="page-title">
+                    <div class="col-sm-12 col-md-6 page-heading text-left">
+                        <h2>{{vd.cate.cate_type}}</h2>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-right">
+                        <ul class="breadcrumbs">
+<!--                            <li><a href="#">home</a></li>-->
+<!--                            <li><a href="#">pages</a></li>-->
+<!--                            <li><a href="#">services</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= -->
+
+
+    <!-- =-=-=-=-=-=-= Our Services =-=-=-=-=-=-= -->
+    <section class="section-padding-70 services-2">
+        <div class="container">
+            <!-- Row -->
+            <div class="row">
+
+                <div class="col-md-8 col-sm-12 col-md-push-4 col-xs-12">
+
+
+<!--                        <div class="item">-->
+                            <img class="img-responsive" width="1000px" src="{% static 'image/' %}{{vd.cate.cate_img}}" alt="It is a truck....">
+<!--                        </div>-->
+
+                    <br>
+                    <p><b>Rent: <label style="color:#016DB6">{{vd.rent}} Rs. / KM</label></b></p>
+
+                    <p>{{vd.veh_desc}}</p>
+
+                    <p><b>Capacity: <label style="color:#016DB6">{{vd.capacity}} KG</label></b></p>
+
+                    <p><b>{{vd.size}}</b></p>
+
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12 text-right">
+                        <div class="more-about"><a class="btn btn-primary btn-lg" href="/client/client_booking/{{vd.veh_id}}">Book Now<i
+                        class="fa fa-chevron-circle-right"></i></a></div>
+                    </div>
+
+                </div>
+
+                <!-- right column -->
+                <div class="col-md-4 col-md-pull-9 col-sm-12 col-xs-12" id="side-bar">
+                    <div class="theiaStickySidebar">
+                        <div class="side-bar-services">
+                            <label style="color:#016DB6">&emsp;&emsp;&emsp;&emsp;&emsp;-:&emsp;Our Vehicles&emsp;:-</label>
+
+                            <h1 style="color:#016DB6">____________________</h1>
+                            <br/>
+                            <br/>
+                            <ul class="side-bar-list">
+                                {% for data in vc %}
+                                    <li><a href="/client/client_vehicle_details/{{data.cate_id}}" >{{data.cate_type}}</a></li>
+                                {% endfor %}
+                            </ul>
+                            <h1 style="color:#016DB6">____________________</h1>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Row End -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Our Services-end =-=-=-=-=-=-= -->
+
+
+    <!-- =-=-=-=-=-=-= Call To Action =-=-=-=-=-=-= -->
+<!--    <div class="parallex-small ">-->
+<!--        <div class="container">-->
+<!--            <div class="row custom-padding-20 ">-->
+<!--                <div class="col-md-8 col-sm-8">-->
+<!--                    <div class="parallex-text">-->
+<!--                        <h4>Not sure which solution fits you business needs?</h4>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; end subsection-text &ndash;&gt;-->
+<!--                </div>-->
+<!--                &lt;!&ndash; end col-md-8 &ndash;&gt;-->
+
+<!--                <div class="col-md-4 col-sm-4">-->
+<!--                    <div class="parallex-button"> <a href="javascript:void(0)" class="btn btn-lg btn-clean">Get a quote <i class="fa fa-angle-double-right "></i></a> </div>-->
+<!--                    &lt;!&ndash; end parallex-button &ndash;&gt;-->
+<!--                </div>-->
+<!--                &lt;!&ndash; end col-md-4 &ndash;&gt;-->
+
+<!--            </div>-->
+<!--            &lt;!&ndash; end row &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end container &ndash;&gt;-->
+<!--    </div>-->
+    <!-- =-=-=-=-=-=-= Call To Action End =-=-=-=-=-=-= -->
+
+{% endblock %}

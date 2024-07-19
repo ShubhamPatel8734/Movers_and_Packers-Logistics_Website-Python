@@ -1,0 +1,184 @@
+﻿{% extends 'client_header.html' %}
+{% load static %}
+{% block feedback %}active{% endblock %}
+
+{% block content %}
+    <!-- =-=-=-=-=-=-= PAGE BREADCRUMB =-=-=-=-=-=-= -->
+    <section class="breadcrumbs-area parallex">
+        <div class="container">
+            <div class="row">
+                <div class="page-title">
+                    <div class="col-sm-12 col-md-7 page-heading text-left">
+                        <h3>Our feeds </h3>
+                        <h2>Feedback</h2>
+                    </div>
+                    <div class="col-sm-12 col-md-5 text-right">
+                        <ul class="breadcrumbs">
+<!--                            <li><a href="#">home</a></li>-->
+<!--                            <li><a href="#">pages</a></li>-->
+<!--                            <li><a href="#">single blog </a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= Blog & News =-=-=-=-=-=-= -->
+    <section id="blog" class="custom-padding">
+        <div class="container">
+            <!-- Row -->
+            <div class="row">
+                <!-- full Content Area -->
+                <div class="col-sm-12 col-xs-12 col-md-12">
+
+                    <!-- blog-comment section -->
+                    <div class="blog-section">
+
+                        <div class="custom-heading">
+                            <h2>Comments ({{fcount}})</h2>
+                        </div>
+
+                        {% for data in fe %}
+
+                        <ol class="comment-list">
+                            <!-- comment-list    -->
+                            <li class="comment">
+                                <div class="comment-info">
+                                    <img alt="author" src="{% static 'images/blog/comment.png' %}" class="pull-left">
+                                    <div class="author-desc">
+                                        <div class="author-title">
+                                            <strong>{{data.cust.first_name}} {{data.cust.last_name}}</strong>
+                                            <ul class="list-inline pull-right">
+                                                <li><a>{{data.feed_date}}</a></li>
+<!--                                                <li><a href="#"><i class="fa fa-reply"></i> Reply</a></li>-->
+                                            </ul>
+                                        </div>
+                                        <p>{{data.feed_desc}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- comment -->
+                        </ol>
+
+                        {% endfor %}
+
+                    </div>
+                    <!-- blog-comment section end-->
+
+
+                    {% if 'client_id' in request.session %}
+                    <!-- blog-comment feedback -->
+                    <div class="blog-section">
+
+                        <div class="custom-heading">
+                            <h2>Post Your Comments</h2>
+                        </div>
+
+
+                        <form action="/client/client_feedback/" method="post" data-parsley-validate="">
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-sm-4">
+                                    <!-- Name -->
+                                    <div class="form-group">
+<!--                                        <label>Cust ID</label>-->
+                                        <input type="text" class="hidden" name="cust" id="cust" placeholder="Cust ID" value="{{id1}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <!-- Name -->
+                                    <div class="form-group">
+<!--                                        <label>Feedback Date</label>-->
+                                        <input type="text" class="hidden" name="feed_date" id="feed_date" placeholder="Feedback Date" value="{{date}}">
+                                    </div>
+                                </div>
+                                <!-- End col-sm-3 -->
+
+<!--                                <div class="col-sm-4">-->
+<!--                                    &lt;!&ndash; Name &ndash;&gt;-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Last Name</label>-->
+<!--                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; End col-sm-3 &ndash;&gt;-->
+
+<!--                                <div class="col-sm-4">-->
+<!--                                    &lt;!&ndash; Email &ndash;&gt;-->
+<!--                                    <div class="form-group">-->
+<!--&lt;!&ndash;                                        <label for="email">Email<span class="required">*</span></label>&ndash;&gt;-->
+<!--                                        <label for="email">Email</label>-->
+<!--                                        <input type="email" name="email" class="form-control" id="email" placeholder="Email">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; End col-sm-6 &ndash;&gt;-->
+
+                                <div class="col-sm-12">
+                                    <!-- Comment -->
+                                    <div class="form-group">
+<!--                                        <label for="comment">Comment<span class="required">*</span></label>-->
+                                        <label for="feed_desc">Comment</label>
+                                        <textarea class="form-control" name="feed_desc" id="feed_desc" rows="10"
+                                        data-parsley-required="true"
+                                        data-parsley-required-message="Some text is required"></textarea>
+                                    </div>
+                                </div>
+                                <!-- End col-sm-12 -->
+
+                                <div class="col-sm-6">
+                                    <button type="submit" id="send" class="btn btn-primary btn-sm">Post  your comment</button>
+                                </div>
+                                <!-- End col-sm-6 -->
+
+                            </div>
+                            <!-- End row -->
+
+                        </form>
+
+
+                    </div>
+                    <!-- blog-comment feedback end -->
+                    {% endif %}
+
+                </div>
+                <!-- full Content Area -->
+
+
+            </div>
+            <!-- Row End -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Blog & News end =-=-=-=-=-=-= -->
+
+
+
+    <!-- =-=-=-=-=-=-= Call To Action =-=-=-=-=-=-= -->
+<!--    <div class="parallex-small ">-->
+<!--        <div class="container">-->
+<!--            <div class="row custom-padding-20 "> <div class="col-md-8 col-sm-8">-->
+<!--                    <div class="parallex-text">-->
+<!--                        <h4>Not sure which solution fits you business needs?</h4>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; end subsection-text &ndash;&gt;-->
+<!--                </div>-->
+<!--                &lt;!&ndash; end col-md-8 &ndash;&gt;-->
+
+<!--                <div class="col-md-4 col-sm-4">-->
+<!--                    <div class="parallex-button"> <a href="javascript:void(0)" class="btn btn-lg btn-clean">Get a quote <i class="fa fa-angle-double-right "></i></a> </div>-->
+<!--                    &lt;!&ndash; end parallex-button &ndash;&gt;-->
+<!--                </div>-->
+<!--                &lt;!&ndash; end col-md-4 &ndash;&gt;-->
+
+<!--            </div>-->
+<!--            &lt;!&ndash; end row &ndash;&gt;-->
+<!--        </div>-->
+<!--        &lt;!&ndash; end container &ndash;&gt;-->
+<!--    </div>-->
+    <!-- =-=-=-=-=-=-= Call To Action End =-=-=-=-=-=-= -->
+
+{% endblock %}

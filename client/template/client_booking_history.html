@@ -1,0 +1,169 @@
+{% extends 'client_header.html' %}
+{% block book_history %}active{% endblock %}
+{% block content %}
+{% load mathfilters %}
+{% load cart_tag %}
+{% load static %}
+
+<!-- =-=-=-=-=-=-= PAGE BREADCRUMB =-=-=-=-=-=-= -->
+<section class="breadcrumbs-area parallex">
+    <div class="container">
+        <div class="row">
+            <div class="page-title">
+                <div class="col-sm-12 col-md-6 page-heading text-left">
+                    <h3>Your Bookings </h3>
+                    <h2>Booking History</h2>
+                </div>
+                <div class="col-sm-12 col-md-6 text-right">
+                    <ul class="breadcrumbs">
+                        <!--                            <li><a href="#">home</a></li>-->
+                        <!--                            <li><a href="#">pages</a></li>-->
+                        <!--                            <li><a href="#">tracking</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= -->
+
+<!-- =-=-=-=-=-=-= Tracking History =-=-=-=-=-=-= -->
+<section id="order-tracking" class="section-padding-80">
+    <div class="container">
+        <!-- Row -->
+        <div class="row">
+            <div class="col-sm-12 col-xs-12 col-md-11">
+                <!-- Search Filter -->
+                <!--                    <div class="tracking-search">-->
+                <!--            <div class="input-group" id="adv-search">-->
+                <!--                <input type="text" class="form-control" placeholder="Track Your Shipment" />-->
+                <!--                <div class="input-group-btn">-->
+                <!--                    <div class="btn-group" role="group">-->
+                <!--                        <div class="dropdown dropdown-lg">-->
+                <!--                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>-->
+                <!--                            <div class="dropdown-menu dropdown-menu-right" role="menu">-->
+                <!--                                <form class="form-horizontal" role="form">-->
+                <!--                                  <div class="form-group">-->
+                <!--                                    <label>Filter by</label>-->
+                <!--                                    <select class="form-control">-->
+                <!--                                        <option value="0" selected>Order History</option>-->
+                <!--                                        <option value="1">Delivered</option>-->
+                <!--                                        <option value="2">Shipped</option>-->
+                <!--                                        <option value="3">Pending</option>-->
+                <!--                                        <option value="4">Canceled</option>-->
+                <!--                                    </select>-->
+                <!--                                  </div>-->
+                <!--                                </form>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--</div>-->
+                <!-- Search Filter End -->
+                <!-- Tracking History -->
+                <div class="block-content">
+                    <div class="table-responsive">
+                        <table class="table table-clean-paddings margin-bottom-0">
+                            <thead>
+                            <tr>
+                                <th>Book Id</th>
+                                <th>Shipped From</th>
+                                <th>Destination</th>
+                                <th>Date & Time</th>
+                                <th>Approx_km</th>
+                                <th>Amount</th>
+                                <th>Payment Status</th>
+                                <th>&emsp;&emsp;Payment Type</th>
+                                <th>Booking</th>
+                                <!--                        <th>Status</th>-->
+                            </tr>
+                            </thead>
+
+                            {% for data in bo %}
+                            <tbody>
+                            <tr>
+                                <td>{{data.book_id}}</td>
+                                <td>{{data.pickup_address}}</td>
+                                <td>{{data.drop_address}}</td>
+                                <td>{{data.book_date_time}}</td>
+                                <td>&emsp;&emsp;{{data.approx_km}}</td>
+                                <td>&nbsp;₹{{data.amount}}</td>
+                                <td>
+                                    {% if data.payment_status == 1 %}
+                                    &emsp;<span class="label label-success label-transparent">Success</span>
+                                    {% else %}
+                                    &emsp;<span class="label label-danger  label-transparent">Pending</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <br/>
+                                    {% if data.payment_type == 1 and data.payment_status == 0 and data.booking == 1 %}
+                                    <!--                            &nbsp;&nbsp;<button type="submit" id="yes" class="btn btn-primary btn-sm">Pay Now</button>-->
+                                    <!--                             <form class="http://127.0.0.1:8000/client/client_booking_history/" action="/Client/order_success/1" method="POST">-->
+                                    <form class="text-center border border-light p-5" action="/client/client_booking_history/" method="POST">
+
+                                        {% csrf_token %}
+
+                                        <input type="hidden" name="id" value="{{data.book_id}}">
+
+                                        <input type="hidden" name="name" id="name" required class="form-control mb-12"
+                                               placeholder="Name">
+
+                                        <!-- RAZORPAY INTEGRATION HERE -->
+
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                                data-key="rzp_test_NUypu1AHXILZ3L"
+                                                data-amount="{{data.amount|multiply:100}}"
+                                                data-currency="INR"
+                                                data-order_id="{{payment.id}}"
+                                                data-buttontext="Pay with Razorpay"
+                                                data-name="Movers & Packers"
+                                                data-url_root="https://eneqd3r9zrjok.x.pipedream.net/"
+                                                data-description="Movers and Packers"
+                                                data-image="{% static 'client_static/images/favicon.ico' %}"
+                                                data-prefill.name="Shubham Patel"
+                                                data-prefill.email="pshubham86@gmail.com"
+                                                data-theme.color="#F37254"
+                                                data-height="auto">
+                                        </script>
+<!--                                        data-theme.color="#fcfdfd"-->
+                                    </form>
+                                    {% elif data.payment_type == 2 %}
+                                    &emsp;<span class="label label-success label-transparent">Cash on Delivery</span>
+                                    {% elif data.payment_type == 1 %}
+                                    <span class="label label-warning label-transparent">Payment with Razorpay</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <br/>
+                                    {% if data.booking == 0 %}
+                                    <span class="label label-primary label-transparent">Pending</span>
+                                    {% elif data.booking == 1 %}
+                                    <span class="label label-success label-transparent">Accepted</span>
+                                    {% elif data.booking == 2 %}
+                                    <span class="label label-danger  label-transparent">Rejected</span>
+                                    {% elif data.booking == 3 %}
+                                    <span class="label label-warning label-transparent">Shipped</span>
+                                    {% endif %}
+                                </td>
+                                <!--                        <td><span class="label label-success label-transparent">Delivered</span></td>-->
+                            </tr>
+
+                            </tbody>
+                            {% endfor %}
+
+                        </table>
+                    </div>
+                </div>
+                <!-- Tracking History End -->
+            </div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- end container -->
+</section>
+<!-- =-=-=-=-=-=-= Tracking History End =-=-=-=-=-=-= -->
+
+{% endblock %}

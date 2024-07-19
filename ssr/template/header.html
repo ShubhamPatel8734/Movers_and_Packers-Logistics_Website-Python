@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<!-- Mirrored from zuramai.github.io/mazer/demo/layout-vertical-navbar.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 09 Dec 2022 23:10:21 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Movers and Packers</title>
+
+    <link rel="stylesheet" href="{% static 'assets/css/main/app.css' %}"/>
+    <link rel="stylesheet" href="{% static 'assets/css/main/app-dark.css' %}"/>
+
+    <link
+            rel="shortcut icon"
+            href="{% static 'assets/images/logo/favicon.svg' %}"
+            type="image/x-icon"
+    />
+    <link
+            rel="shortcut icon"
+            href="{% static 'assets/images/logo/favicon.png' %}"
+            type="image/png"
+    />
+
+</head>
+
+<body>
+<script src="{% static 'assets/js/initTheme.js' %}"></script>
+<div id="app">
+    <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+            <div class="">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="logo">
+                        <a href="/index/">
+                            <h6>&nbsp;</h6>
+                            &emsp;&emsp;
+                            <img width="200px" height="100px" src="{% static 'images/M&P.png' %}" alt="Company's Logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul class="menu">
+                    <li class="sidebar-title">Menu</li>
+
+                    <li class="sidebar-item {% block index %}{% endblock %}">
+                        <a href="/index/" class="sidebar-link">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <!-- start movepack tables -->
+                    <li class="sidebar-item {% block booking %}{% endblock %}">
+                        <a href="/booking/" class="sidebar-link">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Booking</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item  {% block driver %}{% endblock %}">
+                        <a href="/driver1/{{0}}" class="sidebar-link">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Driver</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item  {% block customer %}{% endblock %}">
+                        <a href="/customer/" class="sidebar-link">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Customer</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item  {% block vehiclecategory %}{% endblock %}">
+                        <a href="/vehicle_category/" class="sidebar-link">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Vehicles</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {% block vehicledetails %}{% endblock %}">
+                        <a href="/vehicle_details/" class="sidebar-link">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Vehicle Details</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item {% block feedback %}{% endblock %}">
+                        <a href="/feedback/" class="sidebar-link">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                            <span>Feedback</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item has-sub {% block other %}{% endblock %}">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                            <span>Other Tables</span>
+                        </a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="/state/">State</a>
+                            </li>
+                            <li class="submenu-item {% block city %}{% endblock %}">
+                                <a href="/city/">City</a>
+                            </li>
+                            <li class="submenu-item {% block area %}{% endblock %}">
+                                <a href="/area/">Area</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="sidebar-item has-sub {% block report %}{% endblock %}">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-journal-check"></i>
+                            <span>Reports</span>
+                        </a>
+                        <ul class="submenu">
+                            <li class="submenu-item">
+                                <a href="/report1/">Static Report</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/report2/">Date Wise</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/report3/">Vehicle Report</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/report4/">Customer Report</a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="/report5/">Payment report</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- end movepack tables -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="main" class="layout-navbar navbar-fixed">
+        <header class="mb-3">
+            <nav class="navbar navbar-expand navbar-light navbar-top">
+                <div class="container-fluid">
+                    <a href="#" class="burger-btn d-block">
+                        <i class="bi bi-justify fs-3"></i>
+                    </a>
+
+                    <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-lg-0">
+                        </ul>
+                        <div class="dropdown">
+                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="user-menu d-flex">
+                                    <div class="user-name text-end me-3">
+<!--                                        {% if 'admin_id' in request.session %}-->
+                                        <h6 class="mb-0 text-gray-600">{{ad.username}}</h6>
+                                        <p class="mb-0 text-sm text-gray-600">Administrator</p>
+<!--                                        {% else %}-->
+<!--                                        <h6 class="mb-0 text-gray-600">Welcome Visitor</h6>-->
+<!--                                        <p class="mb-0 text-sm text-gray-600">Administrator</p>-->
+<!--                                        {% endif %}-->
+                                    </div>
+
+                                    <div class="user-img d-flex align-items-center">
+                                        <div class="avatar avatar-md">
+                                            <img src="{% static 'assets/images/faces/2.jpg' %}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <ul
+                                    class="dropdown-menu dropdown-menu-end"
+                                    aria-labelledby="dropdownMenuButton"
+                                    style="min-width: 11rem"
+                            >
+                                <li>
+                                    <h6 class="dropdown-header">Hello, {{ad.first_name}}!</h6>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/profile/">
+                                        <i class="icon-mid bi bi-person me-2"></i>
+                                        My Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider"/>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/logout/"
+                                    ><i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                                        Logout</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        {% block content %}
+
+        {% endblock %}
+        <footer>
+            <div class="footer clearfix mb-0 text-muted">
+                <div class="float-start">
+                    <p>2023 &copy; Movers and Packers</p>
+                </div>
+<!--                <div class="float-end">-->
+<!--                    <p>-->
+<!--                        Crafted with-->
+<!--                        <span class="text-danger"><i class="bi bi-heart"></i></span> by-->
+<!--                        <a href="https://saugi.me/">Saugi</a>-->
+<!--                    </p>-->
+<!--                </div>-->
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="{% static 'assets/js/bootstrap.js' %}"></script>
+<script src="{% static 'assets/js/app.js' %}"></script>
+
+<!-- Need: Apexcharts -->
+<script src="{% static 'assets/extensions/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/js/pages/dashboard.js' %}"></script>
+
+
+<script src="{% static 'assets/extensions/simple-datatables/umd/simple-datatables.js' %}"></script>
+<script src="{% static 'assets/js/pages/simple-datatables.js' %}"></script>
+
+
+</body>
+</html>

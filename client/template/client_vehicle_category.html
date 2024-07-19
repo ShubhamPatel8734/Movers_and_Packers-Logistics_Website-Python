@@ -1,0 +1,66 @@
+﻿{% extends 'client_header.html' %}
+{% load static %}
+{% block vehicles %}active{% endblock %}
+
+{% block content %}
+    <!-- =-=-=-=-=-=-= PAGE BREADCRUMB =-=-=-=-=-=-= -->
+    <section class="breadcrumbs-area parallex">
+        <div class="container">
+            <div class="row">
+                <div class="page-title">
+                    <div class="col-sm-12 col-md-6 page-heading text-left">
+<!--                        <h3>Our Awesome Work</h3>-->
+                        <h2>Vehicles</h2>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-right">
+                        <ul class="breadcrumbs">
+<!--                            <li><a href="#">home</a></li>-->
+<!--                            <li><a href="#">pages</a></li>-->
+<!--                            <li><a href="#">about our projects</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- =-=-=-=-=-=-= PAGE BREADCRUMB END =-=-=-=-=-=-= -->
+
+    <!-- =-=-=-=-=-=-= Services =-=-=-=-=-=-= -->
+    <section class="custom-padding white" id="about-section-3">
+        <div class="container">
+            <div class="main-boxes">
+                <div class="row">
+
+                    {% for data in vc %}
+
+                    <div class="col-sm-12 col-md-4 col-xs-12">
+                        <div class="services-grid-1">
+                            <div class="service-image">
+                                <a href="/client/client_vehicle_details/{{data.cate_id}}"><img class="img-responsive" src="{% static 'image/' %}{{data.cate_img}}" alt="It is a truck...."></a>
+                            </div>
+                            <div class="services-text">
+                                <a href="/client/client_vehicle_details/{{data.cate_id}}"><h4>{{data.cate_type}}</h4></a>
+                            </div>
+
+                        </div>
+                        <!-- end services-grid-1 -->
+                    </div>
+                    <!-- end col-sm-4 -->
+
+                    {% endfor %}
+
+
+                    <div class="clearfix"></div>
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- end main-boxes -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- =-=-=-=-=-=-= Services =-=-=-=-=-=-= -->
+
+{% endblock %}
